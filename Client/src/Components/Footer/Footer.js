@@ -1,6 +1,7 @@
+import { words } from "../../Words.js";
 import "../../Css/Footer/Footer.css";
 function Footer() {
-  return <footer>&copy; CopyWright Mohamed Saad 2025</footer>;
+  return <footer>{words.footerTitle}</footer>;
 }
 
 export default Footer;
