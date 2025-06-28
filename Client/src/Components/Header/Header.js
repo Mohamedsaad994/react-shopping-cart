@@ -1,7 +1,7 @@
-
+import {words} from '../../Words.js'
 import "../../Css/Header/Header.css";
 function Header() {
-  return <header>Shopping Cart</header>;
+  return <header>{words.headerTitle}</header>;
 }
 
 export default Header;
