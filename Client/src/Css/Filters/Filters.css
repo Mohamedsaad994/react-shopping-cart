@@ -1,0 +1,24 @@
+.filters {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  margin-block: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  gap: 20px;
+}
+
+.filters-title {
+  background-color: #2a5ea5;
+  padding: 10px;
+  color: #fff;
+}
+
+select {
+  display: block;
+  height: 40px;
+  border: 1px solid #ccc;
+  width: 100%;
+  border-radius: 8px;
+}

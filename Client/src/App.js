@@ -3,6 +3,7 @@ import Header from "./Components/Header/Header";
 import data from './data.json'
 import { useState } from "react";
 import Products from "./Components/Products/Products";
+import Filters from "./Components/Filters/Filters";
 
 function App() {
   const [products, setProducts] = useState(data)
@@ -12,7 +13,7 @@ function App() {
       <main>
         <div className="wrapper">
           <Products products={products}/>
-          <div className="filters">Filters</div>
+          <Filters/>
         </div>
       </main>
       <Footer />
