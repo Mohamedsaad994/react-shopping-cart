@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  margin: 20px;
+  margin-block: 20px;
 
   .product-item {
     width: 100%;
@@ -48,7 +48,7 @@
     color: #2a5ea5;
   }
 }
-.close-icon{
+.close-icon {
   position: absolute;
   top: 10px;
   right: 20px;
