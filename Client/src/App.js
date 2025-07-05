@@ -1,14 +1,18 @@
 import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 import data from "./data.json";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Products from "./Components/Products/Products";
 import Filters from "./Components/Filters/Filters";
+import Cart from "./Components/Cart/Cart";
 
 function App() {
   const [products, setProducts] = useState(data);
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("");
+  const [cartItems, setCartItems] = useState(
+    JSON.parse(localStorage.getItem("cartItems")) || []
+  );
 
   const handleFilterSize = (e) => {
     setSize(e.target.value);
@@ -41,12 +45,50 @@ function App() {
 
     setProducts(sortedProducts);
   };
+
+  const addToCart = (product) => {
+    const cartItemsClone = [...cartItems];
+    let isProductExist = false;
+    cartItemsClone.forEach((p) => {
+      if (p.id === product.id) {
+        p.qty++;
+        isProductExist = true;
+      }
+    });
+    if (!isProductExist) {
+      cartItemsClone.push({ ...product, qty: 1 });
+    }
+
+    setCartItems(cartItemsClone);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  const removeFromCart = (product) => {
+    const cartItemsClone = [...cartItems];
+
+    const updatedCart = cartItemsClone
+      .map((p) => {
+        if (p.id === product.id) {
+          if (p.qty > 1) {
+            return { ...p, qty: p.qty - 1 }; // decrement qty
+          }
+          return null; // mark for removal
+        }
+        return p;
+      })
+      .filter(Boolean); // remove nulls (products with qty === 0)
+
+    setCartItems(updatedCart);
+  };
   return (
     <div className="layout">
       <Header />
       <main>
         <div className="wrapper">
-          <Products products={products} />
+          <Products products={products} addToCart={addToCart} />
           <Filters
             handleFilterSize={handleFilterSize}
             size={size}
@@ -54,6 +96,7 @@ function App() {
             sort={sort}
           />
         </div>
+        <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
       </main>
       <Footer />
     </div>
