@@ -4,11 +4,13 @@ import data from "./data.json";
 import { useState } from "react";
 import Products from "./Components/Products/Products";
 import Filters from "./Components/Filters/Filters";
+import Cart from "./Components/Cart/Cart";
 
 function App() {
   const [products, setProducts] = useState(data);
   const [size, setSize] = useState("");
   const [sort, setSort] = useState("");
+  const [cartItems, setCartItems] = useState(data)
 
   const handleFilterSize = (e) => {
     setSize(e.target.value);
@@ -54,6 +56,7 @@ function App() {
             sort={sort}
           />
         </div>
+        <Cart cartItems={cartItems}/>
       </main>
       <Footer />
     </div>
